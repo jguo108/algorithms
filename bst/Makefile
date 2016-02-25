@@ -1,0 +1,21 @@
+
+CC=clang++
+
+CFLAGS=-c -Wall
+LDFLAGS=
+
+SOURCES=bst_util.cpp bst_tree.cpp main.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+
+EXECUTABLE=a.out
+
+all: $(SOURCES) $(EXECUTABLE)
+    
+$(EXECUTABLE): $(OBJECTS) 
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -f *.o $(EXECUTABLE) 
