@@ -48,6 +48,8 @@ class BinarySearchTree {
 
     int maxHeightImpl(Node *bst) const;
 
+    int minValueImpl(Node *bst) const;
+
   public:
     // CREATORS
     BinarySearchTree();
@@ -60,6 +62,8 @@ class BinarySearchTree {
     Node* root() const;
 
     int maxHeight() const;
+
+    int minValue() const;
 
 };
 
@@ -143,35 +147,6 @@ BinarySearchTree::BinarySearchTree()
 {
 }
 
-inline
-Node* BinarySearchTree::insertImpl(Node *bst, int value)
-{
-    if (bst == NULL) {
-        bst = new Node(value);
-        return bst;
-    } 
-
-    if (bst->value() == value) {
-        std::cout << "Insert fail: " << value << " already exists!";
-        return NULL;
-    }
-    
-    if (bst->value() < value) {
-        bst->setRight(insertImpl(bst->right(), value));
-        bst->right()->setParent(bst); 
-    } else {
-        bst->setLeft(insertImpl(bst->left(), value));
-        bst->left()->setParent(bst); 
-    }
-    return bst;
-}
-
-inline
-void BinarySearchTree::insert(int value)
-{
-    d_root = insertImpl(d_root, value);
-}
-
 // ACCESSORS
 inline
 Node* BinarySearchTree::root() const
@@ -179,24 +154,8 @@ Node* BinarySearchTree::root() const
     return d_root;
 }
 
-inline
-int BinarySearchTree::maxHeight() const
-{
-    return maxHeightImpl(d_root);
-}
 
-inline
-int BinarySearchTree::maxHeightImpl(Node *bst) const
-{
-  if (!bst) {
-      return 0;
-  }
 
-  int leftHeight = maxHeightImpl(bst->left());
-  int rightHeight = maxHeightImpl(bst->right());
-
-  return (leftHeight > rightHeight) ? leftHeight + 1: rightHeight + 1;
-}
 
 #if 0
 Node *lookup( Node *root, T val) 
@@ -215,12 +174,6 @@ int treeSize( Node *root)
   return 1 + treeSize(root->left) + treeSize(root->right);    
 }
 
-int maxDepth( Node *root) 
-{
-  if( root == NULL) return 0;
-
-  return max(1+maxDepth(root->left), 1+maxDepth(root->right)); 
-}
 
 T minValue( Node *root)
 {

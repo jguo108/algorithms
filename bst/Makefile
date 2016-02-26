@@ -1,7 +1,7 @@
 
 CC=clang++
 
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -Wc++11-extensions -std=c++11
 LDFLAGS=
 
 SOURCES=bst_util.cpp bst_tree.cpp main.cpp
