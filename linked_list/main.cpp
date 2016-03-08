@@ -16,7 +16,7 @@ int main()
 
     list.print();
 
-    list.remove(101);
+    list.r_reverse();
 
     list.print();
 

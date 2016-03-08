@@ -27,17 +27,27 @@ class LinkedList {
   private:
     Node<T> *d_head;
 
+  private:
+    Node<T>** reverse(Node<T> *list);
+
   public:
+    // CREATORS
     LinkedList();
 
     ~LinkedList();
 
+    // MANIPULATORS
     void insert(const T& val);
 
     Node<T>* find(const T& val);
 
     void remove(const T& val);
 
+    void reverse();
+
+    void r_reverse();
+
+    // ACCESSORS
     void print() const;
 };
 

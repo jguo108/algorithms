@@ -34,28 +34,26 @@ void LinkedList<T>::insert(const T& val)
 template <class T>
 void LinkedList<T>::remove(const T& val)
 {
+    while (d_head && d_head->d_val == val) {
+        Node<T> *tmp = d_head;
+        d_head = d_head->d_next;
+        delete tmp;
+    }
+
     if (!d_head) {
         return;
     }
 
-    if (d_head->d_val == val) {
-        Node<T> *next = d_head->d_next;
-        delete d_head;
-        d_head = next;
-        return;
-    }
-
-    Node<T> *cur  = d_head;
-    Node<T> *next = d_head->d_next;
-
-    while (next) {
-        if (next->d_val == val) {
-            cur->d_next = next->d_next;
-            delete next;
-            next = cur->d_next;
+    Node<T> *pre = d_head;
+    Node<T> *cur = pre->d_next;
+    while (cur) {
+        if (cur->d_val == val) {
+            pre->d_next = cur->d_next;
+            delete cur;
+            cur = pre->d_next;
         } else {
-            cur = next;
-            next = cur->d_next;
+            pre = cur;
+            cur = cur->d_next;
         }
     }
 }
@@ -71,6 +69,43 @@ Node<T>* LinkedList<T>::find(const T& val)
         cur = cur->d_next;
     }
     return NULL;
+}
+
+template <class T>
+void LinkedList<T>::reverse()
+{
+    Node<T> *next;
+    Node<T> *newHead = NULL;
+
+    while (d_head) {
+        next = d_head->d_next;
+        d_head->d_next = newHead;
+        newHead = d_head;
+        d_head = next;
+    }
+    d_head = newHead;
+}
+
+template <class T>
+Node<T>** LinkedList<T>::reverse(Node<T> *list)
+{
+    if (!list->d_next) {
+        d_head = list;
+        return &list->d_next;
+    }
+    Node<T> **nextPtr = reverse(list->d_next);
+    *nextPtr = list;
+    list->d_next = NULL;
+    return &list->d_next;
+}
+
+template <class T>
+void LinkedList<T>::r_reverse()
+{
+    if (!d_head) {
+        return;
+    }
+    reverse(d_head);
 }
 
 template <class T>
