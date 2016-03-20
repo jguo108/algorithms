@@ -1,6 +1,8 @@
 
 #include "bst_tree.h"
 
+#include <assert.h>
+
 namespace bst {
 
 Node* BinarySearchTree::insert(Node *bst, Node *pred, Node *succ, int value)
@@ -21,7 +23,7 @@ Node* BinarySearchTree::insert(Node *bst, Node *pred, Node *succ, int value)
         return NULL;
     }
     
-    if (bst->value() < value) {
+    if (bst->value() <= value) {
         bst->setRight(insert(bst->right(), bst, succ, value));
         bst->right()->setParent(bst); 
         bst->d_rightSize++;
@@ -36,6 +38,26 @@ Node* BinarySearchTree::insert(Node *bst, Node *pred, Node *succ, int value)
 void BinarySearchTree::insert(int value)
 {
     d_root = insert(d_root, NULL, NULL, value);
+}
+
+Node* BinarySearchTree::insert(const std::vector<int>& nodes,
+                               int                     start,
+                               int                     end)
+{
+    if (start > end) {
+        return NULL;
+    }
+
+    int mid = (start + end) / 2; 
+    Node *node = new Node(nodes[mid]);
+
+    Node *left  = insert(nodes, start, mid - 1);
+    node->setLeft(left);
+
+    Node *right = insert(nodes, mid + 1, end);
+    node->setRight(right);
+
+    return node;
 }
 
 void BinarySearchTree::toLinkedList(Node       **first,
@@ -84,6 +106,40 @@ void BinarySearchTree::toLinkedList()
     d_head = firstNode;
 }
 
+
+Node* BinarySearchTree::toBinarySearchTree(Node **list, int start, int end)
+{
+    if (start >= end) {
+        return NULL;
+    }
+
+    int mid = (start + end) / 2;
+
+    Node *left = toBinarySearchTree(list, start, mid);
+
+    Node *cur = *list;
+    cur->setLeft(left);
+    (*list) = (*list)->right();
+
+    Node *right = toBinarySearchTree(list, mid + 1, end);
+    cur->setRight(right);
+
+    return cur;
+}
+
+void BinarySearchTree::toBinarySearchTree()
+{
+    int size = 0;
+    Node *list = d_head;
+    while (list) {
+        ++size;
+        list = list->right();
+    }
+
+    d_root = toBinarySearchTree(&d_head, 0, size);
+}
+
+
 int BinarySearchTree::maxHeight(Node *bst) const
 {
   if (!bst) {
@@ -125,18 +181,62 @@ Node* BinarySearchTree::find(Node *bst, int value) const
         return NULL;
     }
 
-    if (bst->value() > value) {
-        return find(bst->left(), value);
-    } else if (bst->value() < value) {
-        return find(bst->right(), value);
-    } else {
+    Node *result = NULL;
+    if (bst->value() >= value) {
+        result = find(bst->left(), value);
+    } 
+
+    if (result) {
+        return result;
+    } else if (bst->value() == value) {
         return bst;
     }
+    
+    if (bst->value() < value) {
+        return find(bst->right(), value);
+    }
+    return result;
 }
+
 
 Node* BinarySearchTree::find(int value) const
 {
     return find(d_root, value);
+}
+
+
+Node* BinarySearchTree::findInMinFirstBST(Node *bst, int value) const
+{
+    if (!bst) {
+        return NULL;
+    }
+
+    if (value == bst->value()) {
+        return bst;
+    }
+
+    if (value < bst->value() || (!bst->left() && !bst->right())) {
+        return NULL;
+    }
+
+    if (!bst->right()
+        || (bst->left()
+            && value >= bst->left()->value()
+            && value < bst->right()->value())) {
+        return findInMinFirstBST(bst->left(), value);
+    }
+
+    if (!bst->left() || (bst->right() && value >= bst->right()->value())) {
+        return findInMinFirstBST(bst->right(), value);
+    }
+
+    return NULL;
+}
+
+
+Node* BinarySearchTree::findInMinFirstBST(int value) const
+{
+    return findInMinFirstBST(d_root, value);
 }
 
 Node* BinarySearchTree::findKth(Node *bst, size_t k) const
@@ -190,6 +290,72 @@ void BinarySearchTree::printLinkedList() const
         cur = cur->right();
     }
     std::cout << std::endl;
+}
+
+Node* BinarySearchTree::successor(Node *node) const
+{
+    Node *successor = NULL;
+    if (node->right()) {
+        successor = node->right();
+        while (successor->left()) {
+            successor = successor->left();
+        }
+    } else {
+        Node *child  = node;
+        Node *parent = node->parent();
+        while (parent && parent->right() == child) {
+            child = parent;
+            parent = parent->parent();
+        }
+        successor = parent;
+    }
+    
+    return successor;
+}
+
+void BinarySearchTree::getKthLargest(Node             *bst,
+                                     std::vector<int> *nodes,
+                                     int               k) const
+{
+    if (!bst) {
+        return;
+    }
+
+    if (nodes->size() == k) {
+        return;
+    }
+
+    getKthLargest(bst->left(), nodes, k);
+    nodes->push_back(bst->value());
+    getKthLargest(bst->right(), nodes, k);
+}
+
+void BinarySearchTree::getKthLargest(std::vector<int>* nodes, int k) const
+{
+    getKthLargest(d_root, nodes, k);
+}
+
+
+const Node* BinarySearchTree::findLCA(const Node *bst,
+                                      const Node *a,
+                                      const Node *b) const
+{
+    assert(bst != NULL)
+
+    if (bst->value() >= a->value() && bst->value() <= b->value()) {
+        return bst;
+    }
+
+    if (bst->value() < a->value()) {
+        return findLCA(bst->right(), a, b);
+    } else {
+        return findLCA(bst->left(), a, b);
+    }
+}
+
+const Node* BinarySearchTree::findLCA(const Node *a, const Node *b) const
+{
+    return findLCA(d_root, a, b);
 }
 
 }

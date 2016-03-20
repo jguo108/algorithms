@@ -2,6 +2,7 @@
 #define BST_TREE
 
 #include <iostream>
+#include <vector>
 
 namespace bst {
 
@@ -81,6 +82,16 @@ class BinarySearchTree {
 
     void toLinkedList(Node **first, Node **last, const Node *node);
 
+    Node* toBinarySearchTree(Node **list, int start, int end);
+
+    Node* insert(const std::vector<int>& nodes, int start, int end);
+
+    Node* findInMinFirstBST(Node *bst, int value) const;
+
+    void getKthLargest(Node *bst, std::vector<int> *nodes, int k) const;
+
+    const Node* findLCA(const Node *bst, const Node *a, const Node *b) const;
+
   public:
     // CREATORS
     BinarySearchTree();
@@ -90,8 +101,16 @@ class BinarySearchTree {
 
     void toLinkedList();
 
+    void toBinarySearchTree();
+
+    void buildFromInorder(const std::vector<int>& nodes);
+
+    void buildFromPreorder(const std::vector<int>& nodes);
+
     // ACCESSORS
     Node* root() const;
+
+    Node* successor(Node *node) const;
 
     int maxHeight() const;
 
@@ -99,9 +118,15 @@ class BinarySearchTree {
 
     Node* find(int value) const;
 
+    Node* findInMinFirstBST(int value) const;
+
     Node* findKth(size_t k) const;
 
+    const Node* findLCA(const Node *a, const Node *b) const;
+
     void printLinkedList() const;
+
+    void getKthLargest(std::vector<int>* nodes, int k) const;
 
     bool operator==(const BinarySearchTree& tree) const;
 };
@@ -128,6 +153,8 @@ Node::Node(int value, Node *pred, Node *succ, Node *left, Node *right)
 , d_rightSize(0)
 {
 }
+
+
 
 // MANIPULATORS
 inline
@@ -212,6 +239,17 @@ inline
 BinarySearchTree::BinarySearchTree()
 : d_root(NULL)
 , d_head(NULL)
+{
+}
+
+inline
+void BinarySearchTree::buildFromInorder(const std::vector<int>& nodes)
+{
+    d_root = insert(nodes, 0, nodes.size() - 1);
+}
+
+inline
+void BinarySearchTree::buildFromPreorder(const std::vector<int>& nodes)
 {
 }
 
