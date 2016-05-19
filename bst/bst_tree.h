@@ -128,6 +128,9 @@ class BinarySearchTree {
 
     void getKthLargest(std::vector<int>* nodes, int k) const;
 
+    void printInorder() const;
+      // EIP, Problem 5.3, Page 52
+
     bool operator==(const BinarySearchTree& tree) const;
 };
 

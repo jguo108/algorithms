@@ -2,6 +2,7 @@
 #include "bst_tree.h"
 
 #include <assert.h>
+#include <stack>
 
 namespace bst {
 
@@ -340,7 +341,7 @@ const Node* BinarySearchTree::findLCA(const Node *bst,
                                       const Node *a,
                                       const Node *b) const
 {
-    assert(bst != NULL)
+    assert(bst != NULL);
 
     if (bst->value() >= a->value() && bst->value() <= b->value()) {
         return bst;
@@ -356,6 +357,24 @@ const Node* BinarySearchTree::findLCA(const Node *bst,
 const Node* BinarySearchTree::findLCA(const Node *a, const Node *b) const
 {
     return findLCA(d_root, a, b);
+}
+
+void BinarySearchTree::printInorder() const
+{
+    std::stack<Node*> nodes;
+
+    Node *cur = d_root;
+    while (!nodes.empty() || cur) {
+        if (cur) {
+            nodes.push(cur);
+            cur = cur->left();
+        } else {
+            cur = nodes.top();
+            nodes.pop();
+            std::cout << cur->value() << " "; 
+            cur = cur->right();
+        }
+    }
 }
 
 }
