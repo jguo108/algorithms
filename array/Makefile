@@ -4,7 +4,7 @@ CC=clang++
 CFLAGS=-c -Wall -Wc++11-extensions -std=c++11
 LDFLAGS=
 
-SOURCES=util.cpp main.cpp
+SOURCES=exercise.cpp util.cpp main.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
 
 EXECUTABLE=a.out
