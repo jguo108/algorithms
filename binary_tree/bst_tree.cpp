@@ -544,7 +544,45 @@ void BinarySearchTree::rightSibling()
 }
 
 
+// ============================================================================
 
+void buildTreesFromNumberOfNodesImpl(int                            numberOfNodes,
+                                     std::vector<BinarySearchTree>& subTrees)
+{
+    if (numberOfNodes == 0) {
+        subTrees.push_back(BinarySearchTree());
+        return;
+    }
+
+    int remainingNumberOfNodes = numberOfNodes - 1;
+
+    std::vector<BinarySearchTree> leftSubTrees;
+    std::vector<BinarySearchTree> rightSubTrees;
+    for (int i = 0; i <= remainingNumberOfNodes; ++i) {
+        buildTreesFromNumberOfNodesImpl(i, leftSubTrees);
+        buildTreesFromNumberOfNodesImpl(remainingNumberOfNodes - i, rightSubTrees);
+
+        for (int i = 0; i < leftSubTrees.size(); ++i) {
+            for (int j = 0; j < rightSubTrees.size(); ++j) {
+                BinarySearchTree tree(new Node(0));
+                tree.root()->setLeft(leftSubTrees[i].root());
+                tree.root()->setRight(rightSubTrees[j].root());
+                subTrees.push_back(tree);
+            }
+        }
+        leftSubTrees.clear();
+        rightSubTrees.clear();
+    }
+}
+
+std::vector<BinarySearchTree> buildTreesFromNumberOfNodes(int numberOfNodes)
+{
+    std::vector<BinarySearchTree> result;
+
+    buildTreesFromNumberOfNodesImpl(numberOfNodes, result);
+
+    return result;
+}
 
 
 

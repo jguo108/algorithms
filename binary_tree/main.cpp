@@ -147,6 +147,12 @@ int main(int argc, char **argv)
             }
             std::cout << std::endl;
         } break;
+        case 16: { // Build all trees from number of nodes 
+            std::vector<BinarySearchTree> allTrees = buildTreesFromNumberOfNodes(3);
+            for (auto& tree : allTrees) {
+                BSTUtil::printBST(tree, 1, 0, std::cout);
+            }
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;

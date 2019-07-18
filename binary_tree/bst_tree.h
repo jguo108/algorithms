@@ -122,6 +122,9 @@ class BinarySearchTree {
       // EPI, Problem 10.16, Page 154
 };
 
+std::vector<BinarySearchTree> buildTreesFromNumberOfNodes(int numberOfNodes);
+  // EPI, Problem 16.8, Page 265
+
 // =============================================================================
 //                          Inline Functions
 // =============================================================================
@@ -140,9 +143,9 @@ Node::Node(int value, Node *pred, Node *succ, Node *left, Node *right)
 , d_left(left)
 , d_right(right)
 , d_parent(NULL)
+, d_levelNext(NULL)
 , d_leftSize(0)
 , d_rightSize(0)
-, d_levelNext(NULL)
 {
 }
 
