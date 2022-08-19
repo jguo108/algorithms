@@ -2,6 +2,7 @@
 #define BST_TREE
 
 #include <vector>
+#include <cstddef>
 
 namespace bst {
 

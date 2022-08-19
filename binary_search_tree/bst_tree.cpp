@@ -202,11 +202,6 @@ BinarySearchTree::BinarySearchTree(const std::vector<int>& preorder)
 
 // ============================================================================
 
-std::vector<int> BinarySearchTree::rangeLookup(int lowerBound, int upperBound) const
-{
-}
-
-
 
 
 

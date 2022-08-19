@@ -1,9 +1,9 @@
 #ifndef LL_LIST_CPP
 #define LL_LIST_CPP
 
-#include "ll_list.h"
+#include "epi_list.h"
 
-namespace ll {
+namespace epi {
 
 template <class T>
 Node<T>::Node(const T& val, struct Node<T> *next)
@@ -369,7 +369,7 @@ void LinkedList<T>::pivoting(const T& k)
     d_head = lessThanList;
 }
 
-} // Close of namespace 'll'
+} // Close of namespace 'epi'
 
 #endif
 
