@@ -1,13 +1,13 @@
 
-#include "bst_tree.h"
-#include "bst_util.h"
+#include "lc_bst.h"
+#include "lc_bst_util.h"
 
 #include <assert.h>
 #include <stack>
 #include <cmath>
 #include <iostream>
 
-namespace bst {
+namespace lc {
 
 int BinarySearchTree::maxHeight(Node *bst) const
 {

@@ -1,5 +1,5 @@
-#ifndef BST_UTIL
-#define BST_UTIL
+#ifndef LC_BST_UTIL
+#define LC_BST_UTIL
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,9 +11,9 @@
 #include <sstream>
 #include <string>
 
-#include "bst_tree.h"
+#include "lc_bst.h"
 
-namespace bst {
+namespace lc {
 
 struct BSTUtil {
   private:
@@ -174,6 +174,6 @@ void BSTUtil::printBST(BinarySearchTree& bst,
                 nodesQueue, out);
 }
 
-} // namespace bst
+} // namespace lc 
 
 #endif

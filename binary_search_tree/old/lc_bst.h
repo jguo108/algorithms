@@ -1,10 +1,10 @@
-#ifndef BST_TREE
-#define BST_TREE
+#ifndef LC_BST_H
+#define LC_BST_H
 
 #include <vector>
 #include <cstddef>
 
-namespace bst {
+namespace lc {
 
 class Node {
   private:
@@ -160,6 +160,6 @@ Node* BinarySearchTree::root() const
     return d_root;
 }
 
-} // namespace bst
+} // namespace lc 
 
 #endif
