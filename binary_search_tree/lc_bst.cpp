@@ -409,4 +409,24 @@ bool BinarySearchTree::isBalanced()
     return isBalancedHelper(d_root, &maxDepth);
 }
 
+bool hasPathSumHelper(Node *node, int sum)
+{
+    if (node == NULL) {
+        return false;
+    }
+
+    int remain = sum - node->value();
+    if (node->left() == NULL && node->right() == NULL) {
+        return remain == 0;
+    }
+
+    return hasPathSumHelper(node->left(), remain) ||
+           hasPathSumHelper(node->right(), remain);
+}
+
+bool BinarySearchTree::hasPathSum(int sum)
+{
+    return hasPathSumHelper(d_root, sum);
+}
+
 } // Close namespace

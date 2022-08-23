@@ -108,6 +108,10 @@ int main(int argc, char **argv)
           tree2.print();
           std::cout << "Is balanced: " << tree2.isBalanced() << std::endl;
         } break;
+        case 112: { // Has path sum 
+          tree.print();
+          std::cout << "Has path sum: " << tree.hasPathSum(520) << std::endl;
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;

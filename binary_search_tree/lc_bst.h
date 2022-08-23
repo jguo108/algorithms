@@ -84,6 +84,9 @@ class BinarySearchTree {
 
   // Leetcode 110 
   bool isBalanced();
+
+  // Leetcode 112
+  bool hasPathSum(int sum);
 };
 
 // ============================================================================
