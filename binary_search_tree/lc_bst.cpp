@@ -429,4 +429,36 @@ bool BinarySearchTree::hasPathSum(int sum)
     return hasPathSumHelper(d_root, sum);
 }
 
+void findAllPathSumHelper(Node *node, std::vector<std::vector<int>> *result, std::vector<int> *currentPath, int sum)
+{
+    if (node == NULL) {
+        return;
+    }
+    int remain = sum - node->value();
+    currentPath->push_back(node->value());
+
+    if (node->left() == NULL && node->right() == NULL) {
+        if (remain == 0) {
+            result->push_back(*currentPath);
+        }
+        currentPath->pop_back();
+        return;
+    }
+
+    findAllPathSumHelper(node->left(), result, currentPath, remain);
+    findAllPathSumHelper(node->right(), result, currentPath, remain);
+
+    currentPath->pop_back();
+}
+
+std::vector<std::vector<int>> BinarySearchTree::findAllPathSum(int sum)
+{
+    std::vector<std::vector<int>> result;
+    std::vector<int> currentPath;
+
+    findAllPathSumHelper(d_root, &result, &currentPath, sum);
+
+    return result;
+}
+
 } // Close namespace

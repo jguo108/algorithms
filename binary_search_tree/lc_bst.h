@@ -87,6 +87,9 @@ class BinarySearchTree {
 
   // Leetcode 112
   bool hasPathSum(int sum);
+
+  // Leetcode 113
+  std::vector<std::vector<int>> findAllPathSum(int sum);
 };
 
 // ============================================================================

@@ -112,6 +112,29 @@ int main(int argc, char **argv)
           tree.print();
           std::cout << "Has path sum: " << tree.hasPathSum(520) << std::endl;
         } break;
+        case 113: { // Find all path sum 
+          Node *n0 = new Node(7);
+          Node *n1 = new Node(2);
+          Node *n2 = new Node(11, n0, n1);
+          Node *n3 = new Node(4, n2, NULL);
+          Node *n4 = new Node(5);
+          Node *n5 = new Node(1);
+          Node *n6 = new Node(4, n4, n5);
+          Node *n7 = new Node(13);
+          Node *n8 = new Node(8, n7, n6);
+          Node *root = new Node(5, n3, n8);
+          BinarySearchTree tree(root);
+          tree.print();
+
+          auto result = tree.findAllPathSum(22);
+          for (auto& path : result) {
+            std::cout << "[";
+            for (auto node : path) {
+              std::cout << node << ", ";
+            }
+            std::cout << "]";
+          }
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;
