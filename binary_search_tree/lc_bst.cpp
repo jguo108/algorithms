@@ -9,6 +9,7 @@
 #include <iostream>
 #include <utility>
 #include <unordered_map>
+#include <algorithm>
 
 namespace lc {
 
@@ -336,10 +337,76 @@ Node* BinarySearchTree::treeFromPreorderAndInorder(const std::vector<int>& preor
     return tree;
 }
 
+int maxDepthHelper(Node *node)
+{
+    if (node == NULL) {
+        return 0;
+    }
+
+    int leftMax = maxDepthHelper(node->left());
+    int rightMax = maxDepthHelper(node->right());
+
+    return 1 + std::max(leftMax, rightMax);
+}
 
 int BinarySearchTree::maxDepth()
 {
-    
+    return maxDepthHelper(d_root);
+}
+
+
+void sumRootToLeafNumbersHelper(Node *node, int runningSum, int *totalSum)
+{
+    if (node == NULL) {
+        return;
+    }
+
+    runningSum = runningSum * 10 + node->value();
+    if (node->left() == NULL && node->right() == NULL) {
+        *totalSum += runningSum;
+    }
+    sumRootToLeafNumbersHelper(node->left(), runningSum, totalSum);
+    sumRootToLeafNumbersHelper(node->right(), runningSum, totalSum);
+}
+
+int BinarySearchTree::sumRootToLeafNumbers()
+{
+    int totalSum = 0;
+    int runningSum = 0;
+
+    sumRootToLeafNumbersHelper(d_root, runningSum, &totalSum);
+
+    return totalSum;
+}
+
+
+bool isBalancedHelper(Node *node, int *maxDepth)
+{
+    if (node == NULL) {
+        *maxDepth = 0;
+        return true;
+    }
+     
+    int leftMaxDepth = 0;
+    bool isLeftBalanced = isBalancedHelper(node->left(), &leftMaxDepth);
+    if (!isLeftBalanced) {
+        return false;
+    }
+
+    int rightMaxDepth = 0;
+    int isRightBalanced = isBalancedHelper(node->right(), &rightMaxDepth);
+    if (!isRightBalanced) {
+        return false;
+    }
+
+    *maxDepth = 1 + std::max(leftMaxDepth, rightMaxDepth);
+    return std::abs(leftMaxDepth - rightMaxDepth) <= 1;
+}
+
+bool BinarySearchTree::isBalanced()
+{
+    int maxDepth;
+    return isBalancedHelper(d_root, &maxDepth);
 }
 
 } // Close namespace

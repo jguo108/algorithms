@@ -78,6 +78,12 @@ class BinarySearchTree {
 
   // Leetcode 104
   int maxDepth();
+
+  // Leetcode 129
+  int sumRootToLeafNumbers();
+
+  // Leetcode 110 
+  bool isBalanced();
 };
 
 // ============================================================================

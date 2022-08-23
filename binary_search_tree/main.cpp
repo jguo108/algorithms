@@ -34,8 +34,6 @@ int main(int argc, char **argv)
     lc::Node *n0 = new lc::Node(100, n1, n2);
     lc::BinarySearchTree tree(n0);
 
-    tree.print();
-
     switch (testCase) {
         case 102: { // Level Order Traversal 102 
           tree.levelOrderTraversal();
@@ -74,6 +72,41 @@ int main(int argc, char **argv)
           Node *root = tree.treeFromPreorderAndInorder(preorder, inorder);
           BinarySearchTree newTree(root);
           newTree.print();
+        } break;
+        case 104: { // max depth 
+          tree.insert(75);
+          tree.print();
+          std::cout << "Max depth: " << tree.maxDepth() << std::endl;
+        } break;
+        case 129: { // Sum root to leaf 
+          BinarySearchTree tree;
+          tree.insert(2);
+          tree.insert(1);
+          tree.insert(4);
+          tree.insert(3);
+          tree.print();
+          std::cout << "Sum: " << tree.sumRootToLeafNumbers() << std::endl;
+        } break;
+        case 110: { // Is balanced tree 
+          BinarySearchTree tree;
+          tree.insert(50);
+          tree.insert(25);
+          tree.insert(75);
+          tree.insert(65);
+          tree.insert(85);
+          tree.print();
+          std::cout << "Is balanced: " << tree.isBalanced() << std::endl;
+
+          BinarySearchTree tree2;
+          tree2.insert(100);
+          tree2.insert(110);
+          tree2.insert(50);
+          tree2.insert(70);
+          tree2.insert(25);
+          tree2.insert(12);
+          tree2.insert(30);
+          tree2.print();
+          std::cout << "Is balanced: " << tree2.isBalanced() << std::endl;
         } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
