@@ -485,4 +485,39 @@ bool BinarySearchTree::isSymmetric()
     return isSymmetricHelper(d_root->left(), d_root->right());
 }
 
+bool BinarySearchTree::isSymmetricIterative()
+{
+    std::stack<Node*> stack1;
+    std::stack<Node*> stack2;
+
+    stack1.push(d_root->left());
+    stack2.push(d_root->right());
+
+    while (!stack1.empty() && !stack2.empty()) {
+        Node *n1 = stack1.top();
+        Node *n2 = stack2.top();
+        stack1.pop();
+        stack2.pop();
+
+        if (n1 == NULL && n2 != NULL) {
+            return false;
+        }
+        if (n1 != NULL && n2 == NULL) {
+            return false;
+        }
+
+        if (n1 != NULL and n2 != NULL) {
+            if (n1->value() != n2->value()) {
+                return false;
+            }
+            stack1.push(n1->right());
+            stack1.push(n1->left());
+
+            stack2.push(n2->left());
+            stack2.push(n2->right());
+        }
+    } 
+    return stack1.empty() && stack2.empty();
+}
+
 } // Close namespace

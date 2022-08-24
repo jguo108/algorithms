@@ -139,7 +139,7 @@ int main(int argc, char **argv)
           Node *n0 = new Node(3);
           Node *n1 = new Node(4);
           Node *n2 = new Node(2, n0, n1);
-          Node *n3 = new Node(3);
+          Node *n3 = new Node(7);
           Node *n4 = new Node(4);
           Node *n5 = new Node(2, n4, n3);
           Node *root = new Node(1, n2, n5);
@@ -147,7 +147,8 @@ int main(int argc, char **argv)
 
           tree.print();
 
-          std::cout << "Is symmetric: " << tree.isSymmetric() << std::endl;
+          std::cout << "Is symmetric (Recursive): " << tree.isSymmetric() << std::endl;
+          std::cout << "Is symmetric (Iterative): " << tree.isSymmetricIterative() << std::endl;
         } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;

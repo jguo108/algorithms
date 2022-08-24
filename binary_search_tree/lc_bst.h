@@ -93,6 +93,7 @@ class BinarySearchTree {
 
   // Leetcode 101
   bool isSymmetric();
+  bool isSymmetricIterative();
 };
 
 // ============================================================================
