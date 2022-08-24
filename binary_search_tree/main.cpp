@@ -159,6 +159,11 @@ int main(int argc, char **argv)
           tree.print();
           std::cout << "Is valid BST: " << tree.isValidBST() << std::endl;
         } break;
+        case 226: { // invert 
+          tree.print();
+          tree.invert();
+          tree.print();
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;

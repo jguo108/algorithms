@@ -576,4 +576,23 @@ bool BinarySearchTree::isValidBST()
     return isValidBSTHelper(d_root, &previousNode);
 }
 
+void invertHelper(Node *node)
+{
+    if (node == NULL) {
+        return;
+    }
+
+    invertHelper(node->left());
+    invertHelper(node->right());
+
+    Node *tmp = node->left();
+    node->setLeft(node->right());
+    node->setRight(tmp);
+}
+
+void BinarySearchTree::invert()
+{
+    invertHelper(d_root);
+}
+
 } // Close namespace

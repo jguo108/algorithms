@@ -100,6 +100,9 @@ class BinarySearchTree {
 
   // Leetcode 98
   bool isValidBST();
+
+  // Leetcode 226
+  void invert();
 };
 
 // ============================================================================
