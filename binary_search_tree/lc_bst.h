@@ -90,6 +90,9 @@ class BinarySearchTree {
 
   // Leetcode 113
   std::vector<std::vector<int>> findAllPathSum(int sum);
+
+  // Leetcode 101
+  bool isSymmetric();
 };
 
 // ============================================================================

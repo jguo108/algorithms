@@ -461,4 +461,28 @@ std::vector<std::vector<int>> BinarySearchTree::findAllPathSum(int sum)
     return result;
 }
 
+bool isSymmetricHelper(Node* n1, Node* n2)
+{
+    if (n1 == NULL && n2 == NULL) {
+        return true;
+    }
+
+    if (n1 == NULL && n2 != NULL) {
+        return false;
+    }
+
+    if (n1 != NULL && n2 == NULL) {
+        return false;
+    }
+
+    return (n1->value() == n2->value()) &&
+        isSymmetricHelper(n1->left(), n2->right()) &&
+        isSymmetricHelper(n1->right(), n2->left());
+}
+
+bool BinarySearchTree::isSymmetric()
+{
+    return isSymmetricHelper(d_root->left(), d_root->right());
+}
+
 } // Close namespace
