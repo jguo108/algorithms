@@ -10,6 +10,7 @@
 #include <utility>
 #include <unordered_map>
 #include <algorithm>
+#include <limits.h>
 
 namespace lc {
 
@@ -542,6 +543,37 @@ int BinarySearchTree::diameter()
     int currentLongestPath = 0;
     diameterHelper(d_root, &currentLongestPath);
     return currentLongestPath;
+}
+
+bool isValidBSTHelper(Node *node, int *previousNode)
+{
+    if (node == NULL) {
+        return true;
+    }
+
+    bool leftResult = isValidBSTHelper(node->left(), previousNode);
+    if (!leftResult) {
+        return false;
+    }
+
+    if (node->value() < *previousNode) {
+        return false;
+    }
+
+    *previousNode = node->value();
+
+    bool rightResult = isValidBSTHelper(node->right(), previousNode);
+    if (!rightResult) {
+        return false;
+    }
+
+    return true;
+}
+
+bool BinarySearchTree::isValidBST()
+{
+    int previousNode = INT_MIN;
+    return isValidBSTHelper(d_root, &previousNode);
 }
 
 } // Close namespace

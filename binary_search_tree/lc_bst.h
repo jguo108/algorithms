@@ -97,6 +97,9 @@ class BinarySearchTree {
 
   // Leetcode 543
   int diameter();
+
+  // Leetcode 98
+  bool isValidBST();
 };
 
 // ============================================================================

@@ -154,6 +154,11 @@ int main(int argc, char **argv)
           tree.print();
           std::cout << "Diameter: " << tree.diameter() << std::endl;
         } break;
+        case 98: { // is valid BST 
+          n4->setValue(101);
+          tree.print();
+          std::cout << "Is valid BST: " << tree.isValidBST() << std::endl;
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;
