@@ -520,4 +520,28 @@ bool BinarySearchTree::isSymmetricIterative()
     return stack1.empty() && stack2.empty();
 }
 
+
+int diameterHelper(Node *node, int *currentLongestPath)
+{
+    if (node == NULL) {
+        return 0;
+    }
+
+    int leftLongestPath = diameterHelper(node->left(), currentLongestPath);
+    int rightLongestPath = diameterHelper(node->right(), currentLongestPath);
+
+    int longestPathAtNode = leftLongestPath + rightLongestPath;
+    if (longestPathAtNode > *currentLongestPath) {
+        *currentLongestPath = longestPathAtNode;
+    }
+    return std::max(leftLongestPath, rightLongestPath) + 1;
+} 
+
+int BinarySearchTree::diameter()
+{
+    int currentLongestPath = 0;
+    diameterHelper(d_root, &currentLongestPath);
+    return currentLongestPath;
+}
+
 } // Close namespace

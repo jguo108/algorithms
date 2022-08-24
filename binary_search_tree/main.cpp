@@ -150,6 +150,10 @@ int main(int argc, char **argv)
           std::cout << "Is symmetric (Recursive): " << tree.isSymmetric() << std::endl;
           std::cout << "Is symmetric (Iterative): " << tree.isSymmetricIterative() << std::endl;
         } break;
+        case 543: { // Diameter 
+          tree.print();
+          std::cout << "Diameter: " << tree.diameter() << std::endl;
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;
