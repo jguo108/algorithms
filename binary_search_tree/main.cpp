@@ -164,6 +164,18 @@ int main(int argc, char **argv)
           tree.invert();
           tree.print();
         } break;
+        case 958: { // Is Complete 
+          tree.print();
+          std::cout << "Is complete: " << tree.isComplete() << std::endl;
+
+          BinarySearchTree tree2;
+          tree2.insert(50);
+          tree2.insert(25);
+          tree2.insert(40);
+          tree2.insert(75);
+          tree2.print();
+          std::cout << "Is complete: " << tree2.isComplete() << std::endl;
+        } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
         } break;

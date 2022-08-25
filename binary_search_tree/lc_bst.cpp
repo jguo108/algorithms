@@ -595,4 +595,30 @@ void BinarySearchTree::invert()
     invertHelper(d_root);
 }
 
+bool BinarySearchTree::isComplete()
+{
+    std::queue<Node*> workingQueue;
+
+    workingQueue.push(d_root);
+
+    while (!workingQueue.empty()) {
+        Node *n = workingQueue.front();
+        workingQueue.pop();
+        if (n == NULL) {
+            break;
+        }
+        workingQueue.push(n->left());
+        workingQueue.push(n->right());
+    }
+
+    while (!workingQueue.empty()) {
+        Node *n = workingQueue.front();
+        workingQueue.pop();
+        if (n != NULL) {
+            return false;
+        }
+    }
+    return true;
+}
+
 } // Close namespace

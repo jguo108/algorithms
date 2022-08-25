@@ -103,6 +103,9 @@ class BinarySearchTree {
 
   // Leetcode 226
   void invert();
+
+  // Leetcode 958
+  bool isComplete();
 };
 
 // ============================================================================
