@@ -17,3 +17,9 @@ binary_search_tree/build/Debug/lc_bst_util.o
 binary_search_tree/build/Debug/lc_bst.o
 .vscode/launch.json
 .vscode/settings.json
+hashtable/build/Debug/lc_questions.o
+hashtable/build/Debug/main.o
+hashtable/build/Debug/outDebug
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/settings.json
