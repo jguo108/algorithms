@@ -11,3 +11,9 @@ design/build/Debug/lc_minstack.o
 design/build/Debug/lc_trie.o
 design/build/Debug/main.o
 design/build/Debug/outDebug.exe
+.vscode/launch.json
+.vscode/settings.json
+binary_search_tree/build/Debug/lc_bst_util.o
+binary_search_tree/build/Debug/lc_bst.o
+.vscode/launch.json
+.vscode/settings.json
