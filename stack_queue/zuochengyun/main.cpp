@@ -74,9 +74,10 @@ int main(int argc, char** argv)
           for (auto i : result) {
               cout << i << " ";
           }
-          cout << "======================" << endl;
           cout << endl;
-
+        } break;
+        case 5: { // 单调栈结构  
+          // TODO
         } break;
         default: {
             std::cerr << "Unknown test case" << std::endl;
