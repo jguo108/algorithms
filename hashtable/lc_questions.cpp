@@ -38,4 +38,14 @@ size_t Questions::lengthOfLongestSubstring(const std::string& input)
     return maxLen;
 }
 
+std::string Questions::minWindowSubstring(const std::string& input)
+{
+    return std::string();
+}
+
+size_t maxLenOfRepeatedSubarray(const std::vector<int>& array1, const std::vector<int>& array2)
+{
+    
+}
+
 }

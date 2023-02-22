@@ -23,3 +23,6 @@ hashtable/build/Debug/outDebug
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/settings.json
+stack_queue/zuochengyun/build/Debug/main.o
+stack_queue/zuochengyun/build/Debug/min_stack.o
+stack_queue/zuochengyun/build/Debug/outDebug.exe
