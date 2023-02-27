@@ -212,12 +212,25 @@ int main(int argc, char **argv)
           Node *result = tree.lowestCommonAncestor(node1, node2);
           cout << "lca of " << node1->value() << " and " << node2->value() << " is " << result->value() << endl;
         } break;
-        case 17: { // 
+        case 17: { // 二叉树节点间的最大距离问题 
           vector<int> input{1,2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18};
           BinarySearchTree tree;
           tree.buildBSTFromSortedArray(input);
           tree.print();
           cout << "Max distance is " << tree.maxDistance() << endl;
+        } break;
+        case 18: { // 通过先序和中序数组生成后续数组
+          vector<int> input{1,2,3,4,5,6,7};
+          BinarySearchTree tree;
+          tree.buildBSTFromSortedArray(input);
+          tree.print();
+          auto preorder = {4, 2, 1, 3, 6, 5, 7};
+          auto inorder = {1, 2, 3, 4, 5, 6, 7};
+          auto postorder = tree.postorderFromPreorderAndInOrder(preorder, inorder);
+          for (auto i : postorder) {
+            cout << i << " ";
+          }
+          cout << endl;
         } break;
     }
     return 0;

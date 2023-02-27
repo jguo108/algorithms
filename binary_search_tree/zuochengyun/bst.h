@@ -90,6 +90,8 @@ class BinarySearchTree {
     Node* lowestCommonAncestor(Node *node1, Node *node2);
 
     size_t maxDistance();
+
+    vector<int> postorderFromPreorderAndInOrder(const vector<int>& preorder, const vector<int>&inorder);
 };
 
 inline

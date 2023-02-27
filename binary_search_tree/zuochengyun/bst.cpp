@@ -788,3 +788,56 @@ size_t BinarySearchTree::maxDistance()
     size_t maxHeight;
     return maxDistanceHelper(d_root, &maxHeight);
 }
+
+void postorderFromPreorderAndInOrderHelper(
+    vector<int> *postorder,
+    const vector<int>& preorder,
+    const vector<int>& inorder,
+    int preorder_start,
+    int preorder_end,
+    int inorder_start,
+    int inorder_end)
+{
+    if (preorder_start > preorder_end) {
+        return;
+    }
+
+
+    int root = preorder[preorder_start];
+    int index = inorder_start;
+    while (true) {
+        if (inorder[index] == root) break;
+        ++index; 
+    }
+
+    int left_tree_size = index - inorder_start;
+    //int right_tree_size = inorder_end - index;
+
+    // left subtree
+    postorderFromPreorderAndInOrderHelper(
+        postorder, preorder, inorder,
+        preorder_start + 1, preorder_start + left_tree_size,
+        inorder_start, inorder_start + left_tree_size - 1);
+
+    // right subtree
+    postorderFromPreorderAndInOrderHelper(
+        postorder, preorder, inorder,
+        preorder_start + left_tree_size + 1, preorder_end,
+        index + 1, inorder_end);
+
+    postorder->push_back(root);
+}
+
+vector<int> BinarySearchTree::postorderFromPreorderAndInOrder(
+    const vector<int>& preorder, const vector<int>&inorder)
+{
+    vector<int> postorder;
+    postorderFromPreorderAndInOrderHelper(
+        &postorder, preorder, inorder,
+        0, inorder.size() - 1, 0, inorder.size() - 1);
+
+    return postorder;
+}
+
+
+
